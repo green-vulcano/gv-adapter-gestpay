@@ -37,9 +37,9 @@ import org.w3c.dom.Node;
  * @version 4.0 07/august/2016
  * @author GreenVulcano Developer Team
  */
-public class MyGVCallOperation implements CallOperation {
+public class GestPayCallOperation implements CallOperation {
     
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(MyGVCallOperation.class);    
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(GestPayCallOperation.class);    
     private OperationKey key = null;
     
     protected String name;

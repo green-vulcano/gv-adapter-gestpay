@@ -28,13 +28,13 @@ public class Activator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		OperationFactory.registerSupplier("my-call", MyGVCallOperation::new);
+		OperationFactory.registerSupplier("gestpay-call", GestPayCallOperation::new);
 
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		OperationFactory.unregisterSupplier("my-call");
+		OperationFactory.unregisterSupplier("gestpay-call");
 
 	}
 
