@@ -19,6 +19,9 @@
  *******************************************************************************/
 package it.greenvulcano.gvesb.virtual.gv_gestpay;
 
+import org.slf4j.Logger;
+import org.w3c.dom.Node;
+
 import it.greenvulcano.configuration.XMLConfig;
 import it.greenvulcano.gvesb.buffer.GVBuffer;
 import it.greenvulcano.gvesb.virtual.CallException;
@@ -27,9 +30,6 @@ import it.greenvulcano.gvesb.virtual.ConnectionException;
 import it.greenvulcano.gvesb.virtual.InitializationException;
 import it.greenvulcano.gvesb.virtual.InvalidDataException;
 import it.greenvulcano.gvesb.virtual.OperationKey;
-
-import org.slf4j.Logger;
-import org.w3c.dom.Node;
 
 
 /**

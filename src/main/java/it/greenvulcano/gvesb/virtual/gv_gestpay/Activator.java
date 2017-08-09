@@ -33,14 +33,15 @@ import org.w3c.dom.NodeList;
 import it.greenvulcano.configuration.XMLConfig;
 import it.greenvulcano.configuration.XMLConfigException;
 import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
-import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecryptSoap;
+import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gvesb.virtual.OperationFactory;
 
 public class Activator implements BundleActivator {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private Map<String, WSCryptDecrypt> channels = new HashMap<String, WSCryptDecrypt>(); 
+	private Map<String, WSCryptDecrypt> cryptDecryptChannels = new HashMap<String, WSCryptDecrypt>(); 
+	private Map<String, WSs2S> s2sChannels = new HashMap<String, WSs2S>();
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -48,11 +49,12 @@ public class Activator implements BundleActivator {
 		
 		try {
 			
-			NodeList encryptDecryptChannelList = XMLConfig.getNodeList("GVSystems.xml","//Channel[@type='GESTPAYEncryptDecryptAdapter' and @enabled='true']");
-			logger.debug("Found "+ encryptDecryptChannelList.getLength() + " GESTPAY Channel");
+			// search in GVCore.xml all node Channel with type "GESTPAYEncryptDecryptAdapter" and start SOAP service
+			NodeList cryptDecryptChannelList = XMLConfig.getNodeList("GVSystems.xml","//Channel[@type='GESTPAYCryptDecryptAdapter' and @enabled='true']");
+			logger.debug("Found "+ cryptDecryptChannelList.getLength() + " GESTPAY cryptDecript Channel");
 			
-			for (int i=0; i< encryptDecryptChannelList.getLength(); i++) {
-				Node channel = encryptDecryptChannelList.item(i);
+			for (int i=0; i< cryptDecryptChannelList.getLength(); i++) {
+				Node channel = cryptDecryptChannelList.item(i);
 				String Sysname = channel.getParentNode().getNodeName();
 				String name = channel.getNodeName();
 				String endpoint = XMLConfig.get(channel, "@endpoint");
@@ -61,7 +63,24 @@ public class Activator implements BundleActivator {
 				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
 				logger.info("Created SOAP service for " + Sysname + "/" + name +", pointing to " + endpoint);
 				
-				channels.put(Sysname + "/" + name, wsCryptDecrypt);
+				cryptDecryptChannels.put(Sysname + "/" + name, wsCryptDecrypt);
+			}
+			
+			// search in GVCore.xml all node Channel with type "GESTPAYs2sAdapter" and start SOAP service
+			NodeList s2sChannelList = XMLConfig.getNodeList("GVSystems.xml","//Channel[@type='GESTPAYs2sAdapter' and @enabled='true']");
+			logger.debug("Found "+ s2sChannelList.getLength() + " GESTPAY s2s Channel");
+			
+			for (int i=0; i< s2sChannelList.getLength(); i++) {
+				Node channel = s2sChannelList.item(i);
+				String Sysname = channel.getParentNode().getNodeName();
+				String name = channel.getNodeName();
+				String endpoint = XMLConfig.get(channel, "@endpoint");
+				
+				// Start SOAP service
+				WSs2S wSs2S = new WSs2S();
+				logger.info("Created SOAP service for " + Sysname + "/" + name +", pointing to " + endpoint);
+				
+				s2sChannels.put(Sysname + "/" + name, wSs2S);
 			}
 		
 		} catch (XMLConfigException e) {
