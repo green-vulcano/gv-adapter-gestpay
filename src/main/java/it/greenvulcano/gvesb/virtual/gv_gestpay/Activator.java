@@ -19,16 +19,54 @@
  *******************************************************************************/
 package it.greenvulcano.gvesb.virtual.gv_gestpay;
 
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
+import it.greenvulcano.configuration.XMLConfig;
+import it.greenvulcano.configuration.XMLConfigException;
+import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
+import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecryptSoap;
 import it.greenvulcano.gvesb.virtual.OperationFactory;
 
 public class Activator implements BundleActivator {
+	
+	private final Logger logger = LoggerFactory.getLogger(getClass());
 
+	private Map<String, WSCryptDecrypt> channels = new HashMap<String, WSCryptDecrypt>(); 
+	
 	@Override
 	public void start(BundleContext context) throws Exception {
 		OperationFactory.registerSupplier("gestpay-call", GestPayCallOperation::new);
+		
+		try {
+			
+			NodeList encryptDecryptChannelList = XMLConfig.getNodeList("GVSystems.xml","//Channel[@type='GESTPAYEncryptDecryptAdapter' and @enabled='true']");
+			logger.debug("Found "+ encryptDecryptChannelList.getLength() + " GESTPAY Channel");
+			
+			for (int i=0; i< encryptDecryptChannelList.getLength(); i++) {
+				Node channel = encryptDecryptChannelList.item(i);
+				String Sysname = channel.getParentNode().getNodeName();
+				String name = channel.getNodeName();
+				String endpoint = XMLConfig.get(channel, "@endpoint");
+				
+				// Start SOAP service
+				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
+				logger.info("Created SOAP service for " + Sysname + "/" + name +", pointing to " + endpoint);
+				
+				channels.put(Sysname + "/" + name, wsCryptDecrypt);
+			}
+		
+		} catch (XMLConfigException e) {
+			 logger.error("GVESB GESTPAY channel setup error", e);
+		} 
 
 	}
 

@@ -48,7 +48,10 @@ public class GestPayCallOperation implements CallOperation {
     public void init(Node node) throws InitializationException  {
         logger.debug("Init start");
         try {            
-            name =  XMLConfig.get(node, "@name");  	
+            name =  XMLConfig.get(node, "@name");
+            
+            String host = XMLConfig.get(node.getParentNode(), "@endpoint");
+            String operation = XMLConfig.get(node, "@action_operation");
         	     
         } catch (Exception exc) {
             throw new InitializationException("GV_INIT_SERVICE_ERROR", new String[][]{{"message", exc.getMessage()}},
