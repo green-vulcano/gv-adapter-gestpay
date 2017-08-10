@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2016 GreenVulcano ESB Open Source Project.
+ * Copyright (c) 2009, 2017 GreenVulcano ESB Open Source Project.
  * All rights reserved.
  *
  * This file is part of GreenVulcano ESB.
@@ -36,6 +36,11 @@ import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
 import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gvesb.virtual.OperationFactory;
 
+/**
+ * 
+ * @version 4.0 august/2017
+ * @author GreenVulcano Developer Team
+ */
 public class Activator implements BundleActivator {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());

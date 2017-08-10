@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2016 GreenVulcano ESB Open Source Project.
+ * Copyright (c) 2009, 2017 GreenVulcano ESB Open Source Project.
  * All rights reserved.
  *
  * This file is part of GreenVulcano ESB.
@@ -41,7 +41,7 @@ import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.EncryptOperation;
 
 /**
  * 
- * @version 4.0 07/august/2016
+ * @version 4.0 august/2017
  * @author GreenVulcano Developer Team
  */
 public class GestPayCallOperation implements CallOperation {
