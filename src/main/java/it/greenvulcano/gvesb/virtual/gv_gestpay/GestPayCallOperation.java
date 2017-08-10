@@ -19,10 +19,16 @@
  *******************************************************************************/
 package it.greenvulcano.gvesb.virtual.gv_gestpay;
 
+import java.util.Map;
+import java.util.Map.Entry;
+
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 
 import it.greenvulcano.configuration.XMLConfig;
+import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
+import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gvesb.buffer.GVBuffer;
 import it.greenvulcano.gvesb.virtual.CallException;
 import it.greenvulcano.gvesb.virtual.CallOperation;
@@ -39,19 +45,47 @@ import it.greenvulcano.gvesb.virtual.OperationKey;
  */
 public class GestPayCallOperation implements CallOperation {
     
-    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(GestPayCallOperation.class);    
-    private OperationKey key = null;
+    private static final Logger logger 	= LoggerFactory.getLogger(GestPayCallOperation.class);    
+    private OperationKey key 			= null;
     
     protected String name;
-       
+    protected String operation;
+    
+    private String cryptDecryptType 	= "GESTPAYCryptDecryptAdapter";
+    private String s2sType 				= "GESTPAYs2sAdapter";
+    
+    private Map<String, WSCryptDecrypt> cryptDecryptChannels 	= Activator.cryptDecryptChannels;
+    private Map<String, WSs2S> s2sChannels 						= Activator.s2sChannels;
+    
+    private WSCryptDecrypt wsCryptDecryp 	= null;
+    private WSs2S wss2s 					= null;
+    
     @Override
     public void init(Node node) throws InitializationException  {
         logger.debug("Init start");
         try {            
             name =  XMLConfig.get(node, "@name");
+            operation = XMLConfig.get(node, "@action_operation");
             
-            String host = XMLConfig.get(node.getParentNode(), "@endpoint");
-            String operation = XMLConfig.get(node, "@action_operation");
+            String sysName = node.getParentNode().getNodeName();
+			String name = node.getNodeName();
+			String nodeKey = sysName + "/" + name;
+            String type = node.getAttributes().getNamedItem("@type").getNodeValue();
+			
+            if (cryptDecryptType.equals(type)) {
+            	for (Entry<String, WSCryptDecrypt> e : cryptDecryptChannels.entrySet()) {
+            		if (e.getKey().equals(nodeKey)) {
+            			wsCryptDecryp = e.getValue();
+            		}
+            	}
+            	
+            } else if (s2sType.equals(type)) {
+            	for (Entry<String, WSs2S> e : s2sChannels.entrySet()) {
+            		if (e.getKey().equals(nodeKey)) {
+            			wss2s = e.getValue();
+            		} 
+            	}
+            }
         	     
         } catch (Exception exc) {
             throw new InitializationException("GV_INIT_SERVICE_ERROR", new String[][]{{"message", exc.getMessage()}},

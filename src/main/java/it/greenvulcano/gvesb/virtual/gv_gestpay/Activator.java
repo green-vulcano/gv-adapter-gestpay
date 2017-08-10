@@ -40,8 +40,8 @@ public class Activator implements BundleActivator {
 	
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 
-	private Map<String, WSCryptDecrypt> cryptDecryptChannels = new HashMap<String, WSCryptDecrypt>(); 
-	private Map<String, WSs2S> s2sChannels = new HashMap<String, WSs2S>();
+	static Map<String, WSCryptDecrypt> cryptDecryptChannels = new HashMap<String, WSCryptDecrypt>(); 
+	static Map<String, WSs2S> s2sChannels = new HashMap<String, WSs2S>();
 	
 	@Override
 	public void start(BundleContext context) throws Exception {
@@ -55,15 +55,15 @@ public class Activator implements BundleActivator {
 			
 			for (int i=0; i< cryptDecryptChannelList.getLength(); i++) {
 				Node channel = cryptDecryptChannelList.item(i);
-				String Sysname = channel.getParentNode().getNodeName();
+				String sysName = channel.getParentNode().getNodeName();
 				String name = channel.getNodeName();
 				String endpoint = XMLConfig.get(channel, "@endpoint");
 				
 				// Start SOAP service
 				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
-				logger.info("Created SOAP service for " + Sysname + "/" + name +", pointing to " + endpoint);
+				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
 				
-				cryptDecryptChannels.put(Sysname + "/" + name, wsCryptDecrypt);
+				cryptDecryptChannels.put(sysName + "/" + name, wsCryptDecrypt);
 			}
 			
 			// search in GVCore.xml all node Channel with type "GESTPAYs2sAdapter" and start SOAP service
