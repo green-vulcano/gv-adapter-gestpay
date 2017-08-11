@@ -60,8 +60,8 @@ public class Activator implements BundleActivator {
 			
 			for (int i=0; i< cryptDecryptChannelList.getLength(); i++) {
 				Node channel = cryptDecryptChannelList.item(i);
-				String sysName = channel.getParentNode().getNodeName();
-				String name = channel.getNodeName();
+				String sysName = XMLConfig.get(channel.getParentNode(), "@id-system");
+				String name = XMLConfig.get(channel, "@id-channel");
 				String endpoint = XMLConfig.get(channel, "@endpoint");
 				
 				// Start SOAP service
@@ -77,15 +77,15 @@ public class Activator implements BundleActivator {
 			
 			for (int i=0; i< s2sChannelList.getLength(); i++) {
 				Node channel = s2sChannelList.item(i);
-				String Sysname = channel.getParentNode().getNodeName();
-				String name = channel.getNodeName();
+				String sysName = XMLConfig.get(channel.getParentNode(), "@id-system");
+				String name = XMLConfig.get(channel, "@id-channel");
 				String endpoint = XMLConfig.get(channel, "@endpoint");
 				
 				// Start SOAP service
 				WSs2S wSs2S = new WSs2S();
-				logger.info("Created SOAP service for " + Sysname + "/" + name +", pointing to " + endpoint);
+				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
 				
-				s2sChannels.put(Sysname + "/" + name, wSs2S);
+				s2sChannels.put(sysName + "/" + name, wSs2S);
 			}
 		
 		} catch (XMLConfigException e) {

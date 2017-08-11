@@ -69,13 +69,18 @@ public class GestPayCallOperation implements CallOperation {
             name =  XMLConfig.get(node, "@name");
             operation = XMLConfig.get(node, "@action_operation");
             
-            String sysName = node.getParentNode().getNodeName();
-			String name = node.getNodeName();
+            String sysName = XMLConfig.get(node.getParentNode().getParentNode(), "@id-system");
+			String name = XMLConfig.get(node.getParentNode(), "@id-channel");
 			String nodeKey = sysName + "/" + name;
-            String type = node.getAttributes().getNamedItem("@type").getNodeValue();
+            String type = XMLConfig.get(node.getParentNode(), "@type");
+            
+            logger.debug("***********NODEKEY: " + nodeKey);
+            logger.debug("***********TYPE: " + type);
 			
             if (cryptDecryptType.equals(type)) {
+            	logger.debug("********* INTO GESTPAYCryptDecryptAdapter ***********");
             	for (Entry<String, WSCryptDecrypt> e : cryptDecryptChannels.entrySet()) {
+            		logger.debug("******** KEY: " + e.getKey() + "  NODEKEY: " + nodeKey);
             		if (e.getKey().equals(nodeKey)) {
             			wsCryptDecryp = e.getValue();
             		}

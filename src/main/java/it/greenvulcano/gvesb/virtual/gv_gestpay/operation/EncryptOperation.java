@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Element;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -32,6 +33,8 @@ import it.greenvulcano.gestpay.wscryptdecrypt.model.Encrypt;
 import it.greenvulcano.gestpay.wscryptdecrypt.model.EncryptResponse.EncryptResult;
 import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
 import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecryptSoap;
+import it.greenvulcano.util.json.JSONUtils;
+import it.greenvulcano.util.json.JSONUtilsException;
 
 /**
  * 
@@ -92,13 +95,16 @@ public class EncryptOperation {
 					encrypt.getPayPalBillingAgreementDescription(),
 					encrypt.getOrderDetails());
 			
-			jsonResponse = mapper.writeValueAsString(result);
+			Element element = (Element) result.getContent().get(0);
+			jsonResponse = JSONUtils.xmlToJson(element).getJSONObject("GestPayCryptDecrypt").toString();
 		
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (JSONUtilsException e) {
 			e.printStackTrace();
 		}
 		
