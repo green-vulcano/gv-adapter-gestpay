@@ -36,6 +36,7 @@ import it.greenvulcano.gvesb.virtual.ConnectionException;
 import it.greenvulcano.gvesb.virtual.InitializationException;
 import it.greenvulcano.gvesb.virtual.InvalidDataException;
 import it.greenvulcano.gvesb.virtual.OperationKey;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DecryptOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.EncryptOperation;
 
 
@@ -112,6 +113,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  if ("encrypt".equals(operation)) {
 	        		  EncryptOperation encrypt = new EncryptOperation();
 	        		  response = encrypt.encryptService(data, wsCryptDecryp);
+	        	  } else if ("decrypt".equals(operation)) {
+	        		  DecryptOperation decrypt = new DecryptOperation();
+	        		  response = decrypt.decryptService(data, wsCryptDecryp);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
