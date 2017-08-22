@@ -29,48 +29,78 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.greenvulcano.gestpay.wscryptdecrypt.model.Decrypt;
-import it.greenvulcano.gestpay.wscryptdecrypt.model.DecryptResponse.DecryptResult;
+import it.greenvulcano.gestpay.wss2s.model.CallPagamS2S;
+import it.greenvulcano.gestpay.wss2s.model.CallPagamS2SResponse.CallPagamS2SResult;
+import it.greenvulcano.gestpay.wss2s.model.WSs2S;
+import it.greenvulcano.gestpay.wss2s.model.WSs2SSoap;
 import it.greenvulcano.util.json.JSONUtils;
 import it.greenvulcano.util.json.JSONUtilsException;
-import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecrypt;
-import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecryptSoap;
 
 /**
  * 
  * @version 4.0 august/2017
  * @author GreenVulcano Developer Team
  */
-public class DecryptOperation {
-
+public class MakePayment {
+	
 private static final Logger logger 	= LoggerFactory.getLogger(EncryptOperation.class);
 	
-	public DecryptOperation() {
-		logger.info("Created Decrypt Operation");
+	public MakePayment() {
+		logger.info("Created Payment Operation");
 	}
 	
 	/**
 	 * 
 	 * @param data
-	 * @param wsCryptDecryp
+	 * @param wss2s
 	 * @return
 	 */
-	public String decryptService(String data, WSCryptDecrypt wsCryptDecryp) {
+	public String paymentService(String data, WSs2S wss2s) {
 		
 		String jsonResponse = null;
 		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			
-			Decrypt decrypt = mapper.readValue(data, Decrypt.class);
+			CallPagamS2S pagam = mapper.readValue(data, CallPagamS2S.class);
 			
-			WSCryptDecryptSoap wsCryptDecryptSoap = wsCryptDecryp.getWSCryptDecryptSoap();
-			DecryptResult result = wsCryptDecryptSoap.decrypt(
-					decrypt.getShopLogin(), 
-					decrypt.getCryptedString());
+			WSs2SSoap wsS2sSoap = wss2s.getWSs2SSoap();
+			CallPagamS2SResult result = wsS2sSoap.callPagamS2S(
+					pagam.getShopLogin(), 
+					pagam.getUicCode(), 
+					pagam.getAmount(), 
+					pagam.getShopTransactionId(), 
+					pagam.getCardNumber(), 
+					pagam.getExpiryMonth(), 
+					pagam.getExpiryYear(), 
+					pagam.getBuyerName(), 
+					pagam.getBuyerEmail(), 
+					pagam.getLanguageId(), 
+					pagam.getCvv(), 
+					pagam.getMin(), 
+					pagam.getTransKey(), 
+					pagam.getPARes(), 
+					pagam.getCustomInfo(), 
+					pagam.getIDEA(), 
+					pagam.getRequestToken(), 
+					pagam.getTokenValue(), 
+					pagam.getClientIP(), 
+					pagam.getItemType(), 
+					pagam.getRecurrent(), 
+					pagam.getSubMerchantId(), 
+					pagam.getShippingDetails(), 
+					pagam.getRedFraudPrevention(), 
+					pagam.getRedCustomerInfo(), 
+					pagam.getRedShippingInfo(), 
+					pagam.getRedBillingInfo(), 
+					pagam.getRedCustomerData(), 
+					pagam.getRedCustomInfo(), 
+					pagam.getRedItems(), 
+					pagam.getApplePay(), 
+					pagam.getOrderDetails());
 			
 			Element element = (Element) result.getContent().get(0);
-			jsonResponse = JSONUtils.xmlToJson(element).getJSONObject("GestPayCryptDecrypt").toString();
+			jsonResponse = JSONUtils.xmlToJson(element).getJSONObject("GestPayS2S").toString();
 			
 		} catch (JsonParseException e) {
 			e.printStackTrace();
@@ -84,4 +114,5 @@ private static final Logger logger 	= LoggerFactory.getLogger(EncryptOperation.c
 		
 		return jsonResponse;
 	}
+
 }

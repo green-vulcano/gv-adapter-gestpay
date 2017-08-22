@@ -38,6 +38,7 @@ import it.greenvulcano.gvesb.virtual.InvalidDataException;
 import it.greenvulcano.gvesb.virtual.OperationKey;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DecryptOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.EncryptOperation;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.MakePayment;
 
 
 /**
@@ -74,14 +75,9 @@ public class GestPayCallOperation implements CallOperation {
 			String name = XMLConfig.get(node.getParentNode(), "@id-channel");
 			String nodeKey = sysName + "/" + name;
             String type = XMLConfig.get(node.getParentNode(), "@type");
-            
-            logger.debug("***********NODEKEY: " + nodeKey);
-            logger.debug("***********TYPE: " + type);
 			
             if (cryptDecryptType.equals(type)) {
-            	logger.debug("********* INTO GESTPAYCryptDecryptAdapter ***********");
             	for (Entry<String, WSCryptDecrypt> e : cryptDecryptChannels.entrySet()) {
-            		logger.debug("******** KEY: " + e.getKey() + "  NODEKEY: " + nodeKey);
             		if (e.getKey().equals(nodeKey)) {
             			wsCryptDecryp = e.getValue();
             		}
@@ -116,6 +112,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  } else if ("decrypt".equals(operation)) {
 	        		  DecryptOperation decrypt = new DecryptOperation();
 	        		  response = decrypt.decryptService(data, wsCryptDecryp);
+	        	  } else if ("payment".equals(operation)) {
+	        		  MakePayment payment = new MakePayment();
+	        		  response = payment.paymentService(data, wss2s);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
