@@ -37,6 +37,7 @@ import it.greenvulcano.gvesb.virtual.InitializationException;
 import it.greenvulcano.gvesb.virtual.InvalidDataException;
 import it.greenvulcano.gvesb.virtual.OperationKey;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DecryptOperation;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DeletePayment;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.EncryptOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.MakePayment;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.SettlePayment;
@@ -119,6 +120,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  } else if ("settle".equals(operation)) {
 	        		  SettlePayment settle = new SettlePayment();
 	        		  response = settle.settleService(data, wss2s);
+	        	  } else if ("delete".equals(operation)) {
+	        		  DeletePayment delete = new DeletePayment();
+	        		  response = delete.deleteService(data, wss2s);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
