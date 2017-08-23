@@ -31,10 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import it.greenvulcano.gestpay.wss2s.model.CallDeleteS2S;
 import it.greenvulcano.gestpay.wss2s.model.CallDeleteS2SResponse.CallDeleteS2SResult;
-import it.greenvulcano.gestpay.wss2s.model.CallSettleS2S;
 import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gestpay.wss2s.model.WSs2SSoap;
-import it.greenvulcano.gestpay.wss2s.model.CallSettleS2SResponse.CallSettleS2SResult;
 import it.greenvulcano.util.json.JSONUtils;
 import it.greenvulcano.util.json.JSONUtilsException;
 
@@ -45,7 +43,7 @@ import it.greenvulcano.util.json.JSONUtilsException;
  */
 public class DeletePayment {
 	
-private static final Logger logger 	= LoggerFactory.getLogger(DeletePayment.class);
+	private static final Logger logger 	= LoggerFactory.getLogger(DeletePayment.class);
 	
 	public DeletePayment() {
 		logger.info("Created Delete Operation");

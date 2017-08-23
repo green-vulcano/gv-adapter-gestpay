@@ -29,8 +29,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.greenvulcano.gestpay.wss2s.model.CallSettleS2S;
-import it.greenvulcano.gestpay.wss2s.model.CallSettleS2SResponse.CallSettleS2SResult;
+import it.greenvulcano.gestpay.wss2s.model.CallUpdateTokenS2S;
+import it.greenvulcano.gestpay.wss2s.model.CallUpdateTokenS2SResponse.CallUpdateTokenS2SResult;
 import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gestpay.wss2s.model.WSs2SSoap;
 import it.greenvulcano.util.json.JSONUtils;
@@ -41,12 +41,12 @@ import it.greenvulcano.util.json.JSONUtilsException;
  * @version 4.0 august/2017
  * @author GreenVulcano Developer Team
  */
-public class SettlePayment {
+public class UpdateToken {
+
+	private static final Logger logger 	= LoggerFactory.getLogger(DeletePayment.class);
 	
-	private static final Logger logger 	= LoggerFactory.getLogger(SettlePayment.class);
-	
-	public SettlePayment() {
-		logger.info("Created Settle Operation");
+	public UpdateToken() {
+		logger.info("Created Update Token Operation");
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class SettlePayment {
 	 * @param wss2s
 	 * @return
 	 */
-	public String settleService(String data, WSs2S wss2s) {
+	public String updateTokenService(String data, WSs2S wss2s) {
 		
 		String jsonResponse = null;
 		
@@ -63,17 +63,16 @@ public class SettlePayment {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			
-			CallSettleS2S settle = mapper.readValue(data, CallSettleS2S.class);
+			CallUpdateTokenS2S updateToken = mapper.readValue(data, CallUpdateTokenS2S.class);
 			
 			WSs2SSoap wsS2sSoap = wss2s.getWSs2SSoap();
 			
-			CallSettleS2SResult result = wsS2sSoap.callSettleS2S(
-					settle.getShopLogin(), 
-					settle.getUicCode(), 
-					settle.getAmount(), 
-					settle.getShopTransID(), 
-					settle.getBankTransID(), 
-					settle.getFullFillment());
+			CallUpdateTokenS2SResult result = wsS2sSoap.callUpdateTokenS2S(
+					updateToken.getShopLogin(), 
+					updateToken.getToken(), 
+					updateToken.getExpiryMonth(), 
+					updateToken.getExpiryYear(), 
+					updateToken.getWithAut());
 			
 			Element element = (Element) result.getContent().get(0);
 			jsonResponse = JSONUtils.xmlToJson(element).getJSONObject("GestPayS2S").toString();
