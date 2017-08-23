@@ -46,7 +46,7 @@ public class DeletePayment {
 	private static final Logger logger 	= LoggerFactory.getLogger(DeletePayment.class);
 	
 	public DeletePayment() {
-		logger.info("Created Delete Operation");
+		logger.info("Created Delete Payment Operation");
 	}
 	
 	/**

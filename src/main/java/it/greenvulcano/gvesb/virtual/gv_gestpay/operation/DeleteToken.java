@@ -29,8 +29,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import it.greenvulcano.gestpay.wss2s.model.CallUpdateTokenS2S;
-import it.greenvulcano.gestpay.wss2s.model.CallUpdateTokenS2SResponse.CallUpdateTokenS2SResult;
+import it.greenvulcano.gestpay.wss2s.model.CallDeleteTokenS2S;
+import it.greenvulcano.gestpay.wss2s.model.CallDeleteTokenS2SResponse.CallDeleteTokenS2SResult;
 import it.greenvulcano.gestpay.wss2s.model.WSs2S;
 import it.greenvulcano.gestpay.wss2s.model.WSs2SSoap;
 import it.greenvulcano.util.json.JSONUtils;
@@ -41,12 +41,12 @@ import it.greenvulcano.util.json.JSONUtilsException;
  * @version 4.0 august/2017
  * @author GreenVulcano Developer Team
  */
-public class UpdateToken {
-
-	private static final Logger logger 	= LoggerFactory.getLogger(UpdateToken.class);
+public class DeleteToken {
 	
-	public UpdateToken() {
-		logger.info("Created Update Token Operation");
+	private static final Logger logger 	= LoggerFactory.getLogger(DeleteToken.class);
+	
+	public DeleteToken() {
+		logger.info("Created Delete Token Operation");
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class UpdateToken {
 	 * @param wss2s
 	 * @return
 	 */
-	public String updateTokenService(String data, WSs2S wss2s) {
+	public String deleteTokenService(String data, WSs2S wss2s) {
 		
 		String jsonResponse = null;
 		
@@ -63,16 +63,13 @@ public class UpdateToken {
 			
 			ObjectMapper mapper = new ObjectMapper();
 			
-			CallUpdateTokenS2S updateToken = mapper.readValue(data, CallUpdateTokenS2S.class);
+			CallDeleteTokenS2S deleteToken = mapper.readValue(data, CallDeleteTokenS2S.class);
 			
 			WSs2SSoap wsS2sSoap = wss2s.getWSs2SSoap();
 			
-			CallUpdateTokenS2SResult result = wsS2sSoap.callUpdateTokenS2S(
-					updateToken.getShopLogin(), 
-					updateToken.getToken(), 
-					updateToken.getExpiryMonth(), 
-					updateToken.getExpiryYear(), 
-					updateToken.getWithAut());
+			CallDeleteTokenS2SResult result = wsS2sSoap.callDeleteTokenS2S(
+					deleteToken.getTokenValue(), 
+					deleteToken.getShopLogin());
 			
 			Element element = (Element) result.getContent().get(0);
 			jsonResponse = JSONUtils.xmlToJson(element).getJSONObject("GestPayS2S").toString();
