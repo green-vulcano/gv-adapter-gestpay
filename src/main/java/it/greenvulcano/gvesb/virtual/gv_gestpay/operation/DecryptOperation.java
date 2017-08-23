@@ -43,7 +43,7 @@ import it.greenvulcano.gestpay.wscryptdecrypt.model.WSCryptDecryptSoap;
  */
 public class DecryptOperation {
 
-private static final Logger logger 	= LoggerFactory.getLogger(EncryptOperation.class);
+private static final Logger logger 	= LoggerFactory.getLogger(DecryptOperation.class);
 	
 	public DecryptOperation() {
 		logger.info("Created Decrypt Operation");

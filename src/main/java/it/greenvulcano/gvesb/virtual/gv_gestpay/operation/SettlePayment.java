@@ -43,7 +43,7 @@ import it.greenvulcano.util.json.JSONUtilsException;
  */
 public class SettlePayment {
 	
-private static final Logger logger 	= LoggerFactory.getLogger(EncryptOperation.class);
+private static final Logger logger 	= LoggerFactory.getLogger(SettlePayment.class);
 	
 	public SettlePayment() {
 		logger.info("Created Settle Operation");

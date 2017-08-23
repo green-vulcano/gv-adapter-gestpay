@@ -43,7 +43,7 @@ import it.greenvulcano.util.json.JSONUtilsException;
  */
 public class MakePayment {
 	
-private static final Logger logger 	= LoggerFactory.getLogger(EncryptOperation.class);
+private static final Logger logger 	= LoggerFactory.getLogger(MakePayment.class);
 	
 	public MakePayment() {
 		logger.info("Created Payment Operation");
