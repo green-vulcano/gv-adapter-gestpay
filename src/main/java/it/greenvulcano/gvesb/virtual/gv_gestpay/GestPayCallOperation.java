@@ -36,6 +36,7 @@ import it.greenvulcano.gvesb.virtual.ConnectionException;
 import it.greenvulcano.gvesb.virtual.InitializationException;
 import it.greenvulcano.gvesb.virtual.InvalidDataException;
 import it.greenvulcano.gvesb.virtual.OperationKey;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.CheckCard;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DecryptOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DeletePayment;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DeleteToken;
@@ -139,6 +140,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  } else if ("refound".equals(operation)) {
 	        		  RefoundOperation refound = new RefoundOperation();
 	        		  response = refound.refoundService(data, wss2s);
+	        	  } else if ("checkCard".equals(operation)) {
+	        		  CheckCard checkCard = new CheckCard();
+	        		  response = checkCard.checkCardService(data, wss2s);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
