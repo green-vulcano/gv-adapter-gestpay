@@ -42,6 +42,7 @@ import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.DeleteToken;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.EncryptOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.MakePayment;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.SettlePayment;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.TransactionStatus;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.UpdateToken;
 
 
@@ -131,6 +132,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  } else if ("deleteToken".equals(operation)) {
 	        		  DeleteToken deleteToken = new DeleteToken();
 	        		  response = deleteToken.deleteTokenService(data, wss2s);
+	        	  } else if ("transactionStatus".equals(operation)) {
+	        		  TransactionStatus transactionStatus = new TransactionStatus();
+	        		  response = transactionStatus.transactionStatusService(data, wss2s);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
