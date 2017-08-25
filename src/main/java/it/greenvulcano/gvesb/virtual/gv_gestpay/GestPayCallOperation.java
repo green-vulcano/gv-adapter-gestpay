@@ -46,6 +46,7 @@ import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.RefoundOperation;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.SettlePayment;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.TransactionStatus;
 import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.UpdateToken;
+import it.greenvulcano.gvesb.virtual.gv_gestpay.operation.VerifyCard;
 
 
 /**
@@ -143,6 +144,9 @@ public class GestPayCallOperation implements CallOperation {
 	        	  } else if ("checkCard".equals(operation)) {
 	        		  CheckCard checkCard = new CheckCard();
 	        		  response = checkCard.checkCardService(data, wss2s);
+	        	  } else if ("verifyCard".equals(operation)) {
+	        		  VerifyCard verifyCard = new VerifyCard();
+	        		  response = verifyCard.verifyCardService(data, wss2s);
 	        	  }
 	        	  
 	        	  gvBuffer.setObject(response);
