@@ -1,4 +1,4 @@
-[![gv-logo](../img/logo.png)](http://www.greenvulcanotechnologies.com)
+[![gv-logo](img/logo.png)](http://www.greenvulcanotechnologies.com)
 
 # GV ESB: GestPay API
 
