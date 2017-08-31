@@ -1,6 +1,6 @@
 [![gv-logo](img/logo.png)](http://www.greenvulcanotechnologies.com)
 
-[<img src="../img/index.png" width="32">](index.md)
+[<img src="img/index.png" width="32">](index.md)
 
 ----
 ### Decrypt
