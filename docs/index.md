@@ -4,6 +4,6 @@
 
 * [Encrypt](Encrypt.md)
 * [Decrypt](Decrypt.md)
-* [Settle](Settle.md)
 * [Make Payment](MakePayment.md)
+* [Settle](Settle.md)
 * [Delete](Delete.md)
