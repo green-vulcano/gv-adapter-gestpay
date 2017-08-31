@@ -10,15 +10,16 @@ Is the main entrypoint for Gestpay. You must call Encrypt either if you want to 
 - **Payload**:
 ```	
         {
-            "shopLogin":<required>,
-            "uicCode":<required>,
-            "amount":<required>,
-            "shopTransactionId":<required>,
+            "shopLogin":<shopLogin --- required>,
+            "uicCode":<uicCode --- required>,
+            "amount":<amount --- required>,
+            "shopTransactionId":<shopTransactionId --- required>,
             "cardNumber":<cardNumber>,
             "expiryYear":<expiryMonth>,
             "expiryYear":<expiryYear>,
             "buyerName":<buyerName>,
-            "buyerEmail":<buyerEmail>,                                                             "languageId":<languageId>,
+            "buyerEmail":<buyerEmail>,
+	    "languageId":<languageId>,
             "cvv":<cvv>,
             "customInfo":<customInfo>,
             "requestToken":<requestToken>,
