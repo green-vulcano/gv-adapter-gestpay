@@ -13,8 +13,7 @@ Communicates the payment transaction result to the merchant through an encrypted
         "shopLogin":<shopLogin>,
         "cryptedString":<cryptedString>
     }
-```
-
+   ```
 - **Response**:
 
 ```
