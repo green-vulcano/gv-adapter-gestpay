@@ -11,10 +11,10 @@ Perform the transaction.
 ```
     {
 
-        "shopLogin":<shopLogin>,
-        "uicCode":<uicCode>,
-        "amount":<amount>,
-        "shopTransID":<shopTransID>,
+        "shopLogin":<shopLogin --- required>,
+        "uicCode":<uicCode --- required>,
+        "amount":<amount --- required>,
+        "shopTransID":<shopTransID --- required>,
         "bankTransID":<bankTransID>,
         "fullFillment":<fullFillment>
     }
