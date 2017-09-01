@@ -36,6 +36,33 @@ Use this payload if you choose to pay with the credit card. Parameters in **bold
 }
 </pre>
 
+Use this payload if you choose to pay by token. Parameters in **bold** are mandatory.
+<pre>
+{
+  <b> "shopLogin":"< shopLogin >",
+   "uicCode":"< uicCode >",
+   "amount":"< amount >",
+   "shopTransactionId":"< shopTransactionId >",
+   "TokenValue":< TokenValue ></b>,
+   "buyerName":"< buyerName >",
+   "buyerEmail":"< buyerEmail >",
+   "languageId":"< languageId >",
+   "cvv":"< cvv >",
+   "requestToken":"< requestToken >",
+   "itemType":"< itemType >",
+   "recurrent":"< recurrent >",
+   "shippingDetails":{
+      "shipToName":"< shipToName>",
+      "shipToStreet":"< shipToStreet >",
+      "shipToCity":"< shipToCity >",
+      "shipToState":"< shipToState >",
+      "shipToCountryCode":"< shipToCountry >",
+      "shipToZip":"< ShipToZip >"
+   }
+}
+</pre>
+
+
 -**Response**
 
 ```
