@@ -11,7 +11,7 @@ Is the main entrypoint for Gestpay. You must call Encrypt either if you want to 
 
 <pre>
         {
-            <b>"shopLogin":<shopLogin,
+            <b>"shopLogin":<shopLogin>,
             "uicCode":<uicCode>,
             "amount":<amount>,
             "shopTransactionId":<shopTransactionId></b>,
