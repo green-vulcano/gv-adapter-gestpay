@@ -9,14 +9,30 @@ Perform the transaction.
 -**Payload**:
 
 Use this payload if you choose to pay with the credit card. Parameters in **bold** are mandatory.
-<pre>{
-   <b>"shopLogin":"< shopLogin >",
+<pre>
+{
+  <b> "shopLogin":"< shopLogin >",
    "uicCode":"< uicCode >",
    "amount":"< amount >",
-   "shopTransactionId":"< shopTransactionId >"</b>
+   "shopTransactionId":"< shopTransactionId >",
    "cardNumber":"< cardNumber >",
    "expiryMonth":"< expiryMonth >",
-   "expiryYear":"< expiryYear >"
+   "expiryYear":"< expiryYear >"</b>,
+   "buyerName":"< buyerName >",
+   "buyerEmail":"< buyerEmail >",
+   "languageId":"< languageId >",
+   "cvv":"< cvv >",
+   "requestToken":"< requestToken >",
+   "itemType":"< itemType >",
+   "recurrent":"< recurrent >",
+   "shippingDetails":{
+      "shipToName":"< shipToName>",
+      "shipToStreet":"< shipToStreet >",
+      "shipToCity":"< shipToCity >",
+      "shipToState":"< shipToState >",
+      "shipToCountryCode":"< shipToCountry >",
+      "shipToZip":"< ShipToZip >"
+   }
 }
 </pre>
 
