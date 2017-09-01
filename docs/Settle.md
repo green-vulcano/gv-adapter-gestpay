@@ -4,21 +4,21 @@
 
 ----
 ### Settle
-Merchant can use this method to settle the transaction.
+Merchant can use this method to settle the transaction. Parameters in **bold** are mandatory
 
 -**Payload**:
 
-```
+<pre>
     {
 
-    "shopLogin":<shopLogin --- required>,
-    "uicCode":<uicCode --- required>,
-    "amount":<amount --- required>,
-    "shopTransID":<shopTransID --- required>,
-    "bankTransID":<bankTransID --- required>,
+   <b> "shopLogin":< shopLogin >,
+    "uicCode":< uicCode >,
+    "amount":< amount >,
+    "shopTransID":< shopTransID >,
+    "bankTransID":< bankTransID ></b>,
     "fullFillment":<fullFillment>
     }
-```
+</pre>
 
 -**Response**:
 
