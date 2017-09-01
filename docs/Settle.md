@@ -10,7 +10,6 @@ Merchant can use this method to settle the transaction. Parameters in **bold** a
 
 <pre>
     {
-
    <b> "shopLogin":< shopLogin >,
     "uicCode":< uicCode >,
     "amount":< amount >,
