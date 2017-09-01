@@ -1,6 +1,9 @@
 [![gv-logo](img/logo.png)](http://www.greenvulcanotechnologies.com)
 
 # GV ESB: GestPay API
+This adapter integrates GestPay API SOAP into GreenVulcano.
+
+**-Operations**
 
 * [Encrypt](Encrypt.md)
 * [Decrypt](Decrypt.md)
