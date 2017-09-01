@@ -11,11 +11,11 @@ Merchant can use this method to settle the transaction.
 ```
     {
 
-    "shopLogin":<shopLogin>,
-    "uicCode":<uicCode>,
-    "amount":<amount>,
-    "shopTransID":<shopTransID>,
-    "bankTransID":<bankTransID>,
+    "shopLogin":<shopLogin --- required>,
+    "uicCode":<uicCode --- required>,
+    "amount":<amount --- required>,
+    "shopTransID":<shopTransID --- required>,
+    "bankTransID":<bankTransID --- required>,
     "fullFillment":<fullFillment>
     }
 ```
