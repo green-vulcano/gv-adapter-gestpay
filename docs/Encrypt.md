@@ -8,8 +8,9 @@
 Is the main entrypoint for Gestpay. You must call Encrypt either if you want to use the standard payment page, or the custom iframe solution.
 	
 - **Payload**:
+
+```
 <pre>
-```	
         {
             <b>"shopLogin":<shopLogin,</b>
             "uicCode":<uicCode --- required>,
@@ -40,8 +41,9 @@ Is the main entrypoint for Gestpay. You must call Encrypt either if you want to 
             "payPalBillingAgreementDescription":<payPalBillingAgreementDescription>,
             "orderDetails":<orderDetails>   
         }
+	</pre>
 ```
-</pre>
+
 
 - **Response**
     ```
