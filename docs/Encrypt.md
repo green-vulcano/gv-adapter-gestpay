@@ -5,7 +5,7 @@
 ----
 ### Encrypt
 
-Is the main entrypoint for Gestpay. You must call Encrypt either if you want to use the standard payment page, or the custom iframe solution.
+Is the main entrypoint for Gestpay. You must call Encrypt either if you want to use the standard payment page, or the custom iframe solution. Parameters in **bold** are mandatory.
 	
 - **Payload**:
 
