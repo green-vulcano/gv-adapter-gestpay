@@ -9,9 +9,9 @@ Delete an authorized transaction.
 - **Payload**:
 ```
         {
-            "shopLogin":<shopLogin>,
-            "shopTransactionId":<shopTransactionId>,
-            "bankTransactionId":<bankTransactionId>,
+            "shopLogin":<shopLogin --- required>,
+            "shopTransactionId":<shopTransactionId --- required>,
+            "bankTransactionId":<bankTransactionId --- required>,
             "cancelReason":<cancelReason>
         }
 ```
