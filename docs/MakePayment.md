@@ -6,7 +6,8 @@
 ### Make Payment
 Perform the transaction.
 
--**Payload**
+-**Payload**:
+
 Use this payload if you choose to pay with the credit card. Parameters in **bold** are mandatory.
 <pre>{
    <b>"shopLogin":"< shopLogin >",
