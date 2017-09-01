@@ -10,7 +10,7 @@ Delete an authorized transaction.
 <pre>
 
         {
-           <b> "shopLogin":<shopLogin --- required>,</b>
+           <b> "shopLogin":< shopLogin --- required >,</b>
             "shopTransactionId":<shopTransactionId --- required>,
             "bankTransactionId":<bankTransactionId --- required>,
             "cancelReason":<cancelReason>
