@@ -7,18 +7,17 @@
 Perform the transaction.
 
 -**Payload**
-
-```
-    {
-
-        "shopLogin":<shopLogin --- required>,
-        "uicCode":<uicCode --- required>,
-        "amount":<amount --- required>,
-        "shopTransID":<shopTransID --- required>,
-        "bankTransID":<bankTransID>,
-        "fullFillment":<fullFillment>
-    }
-```
+Use this payload if you choose to pay with the credit card. Parameters in **bold** are mandatory.
+<pre>{
+   <b>"shopLogin":"< shopLogin >",
+   "uicCode":"< uicCode >",
+   "amount":"< amount >",
+   "shopTransactionId":"< shopTransactionId >"</b>
+   "cardNumber":"< cardNumber >",
+   "expiryMonth":"< expiryMonth >",
+   "expiryYear":"< expiryYear >"
+}
+</pre>
 
 -**Response**
 
