@@ -4,7 +4,8 @@
 
 ----
 ### Decrypt
-Communicates the payment transaction result to the merchant through an encrypted string. Parameters in **bold** are mandatory.
+Communicates the payment transaction result to the merchant through an encrypted string.
+Parameters in **bold** are mandatory.
 - **Payload**:
 
         
