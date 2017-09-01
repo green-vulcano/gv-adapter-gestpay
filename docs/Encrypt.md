@@ -9,13 +9,12 @@ Is the main entrypoint for Gestpay. You must call Encrypt either if you want to 
 	
 - **Payload**:
 
-```
 <pre>
         {
-            <b>"shopLogin":<shopLogin,</b>
-            "uicCode":<uicCode --- required>,
-            "amount":<amount --- required>,
-            "shopTransactionId":<shopTransactionId --- required>,
+            <b>"shopLogin":<shopLogin,
+            "uicCode":<uicCode>,
+            "amount":<amount>,
+            "shopTransactionId":<shopTransactionId></b>,
             "cardNumber":<cardNumber>,
             "expiryYear":<expiryMonth>,
             "expiryYear":<expiryYear>,
@@ -41,8 +40,7 @@ Is the main entrypoint for Gestpay. You must call Encrypt either if you want to 
             "payPalBillingAgreementDescription":<payPalBillingAgreementDescription>,
             "orderDetails":<orderDetails>   
         }
-	</pre>
-```
+</pre>
 
 
 - **Response**
