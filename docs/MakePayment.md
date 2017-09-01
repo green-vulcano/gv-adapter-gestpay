@@ -43,7 +43,7 @@ Use this payload if you choose to pay by token. Parameters in **bold** are manda
    "uicCode":"< uicCode >",
    "amount":"< amount >",
    "shopTransactionId":"< shopTransactionId >",
-   "TokenValue":< TokenValue ></b>,
+   "tokenValue":< tokenValue ></b>,
    "buyerName":"< buyerName >",
    "buyerEmail":"< buyerEmail >",
    "languageId":"< languageId >",
