@@ -16,7 +16,7 @@ Merchant can use this method to settle the transaction. Parameters in **bold** a
     "amount":< amount >,
     "shopTransID":< shopTransID >,
     "bankTransID":< bankTransID ></b>,
-    "fullFillment":<fullFillment>
+    "fullFillment":< fullFillment >
     }
 </pre>
 
