@@ -42,6 +42,7 @@ import it.greenvulcano.util.json.JSONUtilsException;
  * @version 4.0 august/2017
  * @author GreenVulcano Developer Team
  */
+@SuppressWarnings("unused")
 public class VerifyCard {
 
 	private static final Logger logger 	= LoggerFactory.getLogger(VerifyCard.class);
