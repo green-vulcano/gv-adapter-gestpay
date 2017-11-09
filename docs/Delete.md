@@ -17,6 +17,9 @@ Delete an authorized transaction. Parameters in **bold** are mandatory.
         }
 
 </pre>
+
+Note: other than shopLogin, shopTransactionID might suffice if unique
+
 - **Response**:
 
 ```
