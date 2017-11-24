@@ -6,19 +6,62 @@
 ### Make Payment
 Perform the transaction.
 
--**Payload**
+-**Payload**:
 
-```
-    {
+Use this payload if you choose to pay with the credit card. Parameters in **bold** are mandatory.
+<pre>
+{
+  <b> "shopLogin":"< shopLogin >",
+   "uicCode":"< uicCode >",
+   "amount":"< amount >",
+   "shopTransactionId":"< shopTransactionId >",
+   "cardNumber":"< cardNumber >",
+   "expiryMonth":"< expiryMonth >",
+   "expiryYear":"< expiryYear >"</b>,
+   "buyerName":"< buyerName >",
+   "buyerEmail":"< buyerEmail >",
+   "languageId":"< languageId >",
+   "cvv":"< cvv >",
+   "requestToken":"< requestToken >",
+   "itemType":"< itemType >",
+   "recurrent":"< recurrent >",
+   "shippingDetails":{
+      "shipToName":"< shipToName>",
+      "shipToStreet":"< shipToStreet >",
+      "shipToCity":"< shipToCity >",
+      "shipToState":"< shipToState >",
+      "shipToCountryCode":"< shipToCountry >",
+      "shipToZip":"< ShipToZip >"
+   }
+}
+</pre>
 
-        "shopLogin":<shopLogin --- required>,
-        "uicCode":<uicCode --- required>,
-        "amount":<amount --- required>,
-        "shopTransID":<shopTransID --- required>,
-        "bankTransID":<bankTransID>,
-        "fullFillment":<fullFillment>
-    }
-```
+Use this payload if you choose to pay by token. Parameters in **bold** are mandatory.
+<pre>
+{
+  <b> "shopLogin":"< shopLogin >",
+   "uicCode":"< uicCode >",
+   "amount":"< amount >",
+   "shopTransactionId":"< shopTransactionId >",
+   "tokenValue":< tokenValue ></b>,
+   "buyerName":"< buyerName >",
+   "buyerEmail":"< buyerEmail >",
+   "languageId":"< languageId >",
+   "cvv":"< cvv >",
+   "requestToken":"< requestToken >",
+   "itemType":"< itemType >",
+   "recurrent":"< recurrent >",
+   "shippingDetails":{
+      "shipToName":"< shipToName>",
+      "shipToStreet":"< shipToStreet >",
+      "shipToCity":"< shipToCity >",
+      "shipToState":"< shipToState >",
+      "shipToCountryCode":"< shipToCountry >",
+      "shipToZip":"< ShipToZip >"
+   }
+}
+</pre>
+
 
 -**Response**
 

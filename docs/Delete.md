@@ -4,17 +4,21 @@
 
 ----
 ### Delete Payment
-Delete an authorized transaction.
+Delete an authorized transaction. Parameters in **bold** are mandatory.
 
 - **Payload**:
-```
+<pre>
+
         {
-            "shopLogin":<shopLogin --- required>,
-            "shopTransactionId":<shopTransactionId --- required>,
-            "bankTransactionId":<bankTransactionId --- required>,
-            "cancelReason":<cancelReason>
+           <b> "shopLogin":< shopLogin >,
+            "shopTransactionId":< shopTransactionId >,
+            "bankTransactionId":< bankTransactionId >,</b>
+            "cancelReason":< cancelReason >
         }
-```
+
+</pre>
+
+Note: other than shopLogin, shopTransactionID might suffice if unique
 
 - **Response**:
 

@@ -4,16 +4,17 @@
 
 ----
 ### Decrypt
-Communicates the payment transaction result to the merchant through an encrypted string .
+Communicates the payment transaction result to the merchant through an encrypted string.
+Parameters in **bold** are mandatory.
 - **Payload**:
 
         
-   ```	
+ <pre>     
     {
-        "shopLogin":<shopLogin>,
-        "cryptedString":<cryptedString>
+      <b>  "shopLogin":< shopLogin >,
+        "cryptedString":< cryptedString ></b>
     }
-   ```
+ </pre>
 - **Response**:
 
 ```
