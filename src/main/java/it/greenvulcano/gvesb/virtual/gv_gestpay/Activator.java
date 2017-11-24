@@ -64,6 +64,8 @@ public class Activator implements BundleActivator {
 				String name = XMLConfig.get(channel, "@id-channel");
 				String endpoint = XMLConfig.get(channel, "@endpoint");
 				
+				logger.debug("GESTPAY cryptDecrypt endpoint: " + endpoint);
+				
 				// Start SOAP service
 				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
 				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
@@ -80,6 +82,8 @@ public class Activator implements BundleActivator {
 				String sysName = XMLConfig.get(channel.getParentNode(), "@id-system");
 				String name = XMLConfig.get(channel, "@id-channel");
 				String endpoint = XMLConfig.get(channel, "@endpoint");
+				
+				logger.debug("GESTPAY s2s endpoint: " + endpoint);
 				
 				// Start SOAP service
 				WSs2S wSs2S = new WSs2S(new URL(endpoint));
