@@ -82,7 +82,7 @@ public class Activator implements BundleActivator {
 				String endpoint = XMLConfig.get(channel, "@endpoint");
 				
 				// Start SOAP service
-				WSs2S wSs2S = new WSs2S();
+				WSs2S wSs2S = new WSs2S(new URL(endpoint));
 				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
 				
 				s2sChannels.put(sysName + "/" + name, wSs2S);
