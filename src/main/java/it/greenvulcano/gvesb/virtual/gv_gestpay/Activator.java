@@ -19,9 +19,19 @@
  *******************************************************************************/
 package it.greenvulcano.gvesb.virtual.gv_gestpay;
 
+import java.io.ByteArrayOutputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.handler.MessageContext;
+import javax.xml.ws.handler.soap.SOAPHandler;
+import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -48,6 +58,7 @@ public class Activator implements BundleActivator {
 	static Map<String, WSCryptDecrypt> cryptDecryptChannels = new HashMap<String, WSCryptDecrypt>(); 
 	static Map<String, WSs2S> s2sChannels = new HashMap<String, WSs2S>();
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public void start(BundleContext context) throws Exception {
 		OperationFactory.registerSupplier("gestpay-call", GestPayCallOperation::new);
@@ -69,6 +80,18 @@ public class Activator implements BundleActivator {
 				// Start SOAP service
 				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
 				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
+				
+				
+				if (logger.isDebugEnabled()) {
+				
+					BindingProvider wsBindingProvider = (BindingProvider) wsCryptDecrypt;
+					
+					List handlerList = wsBindingProvider.getBinding().getHandlerChain();
+					if (handlerList==null) handlerList = new ArrayList();
+					handlerList.add(new SOAPLoggingHandler());
+					wsBindingProvider.getBinding().setHandlerChain(handlerList);
+					
+				}
 				
 				cryptDecryptChannels.put(sysName + "/" + name, wsCryptDecrypt);
 			}
@@ -96,6 +119,59 @@ public class Activator implements BundleActivator {
 			 logger.error("GVESB GESTPAY channel setup error", e);
 		} 
 
+	}
+	
+	public static class SOAPLoggingHandler implements SOAPHandler<SOAPMessageContext> {
+		
+		private final static Logger log = LoggerFactory.getLogger(SOAPLoggingHandler.class);
+
+		@Override
+		public boolean handleMessage(SOAPMessageContext context) {
+			
+			try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+				
+				Boolean outboundProperty = (Boolean)context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+				
+				context.getMessage().writeTo(byteArrayOutputStream);
+			
+				if (outboundProperty) {
+					log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+					
+				} else {
+					log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+				}
+				
+			} catch (Exception e) {
+				log.warn("SOAP Message dump FAILED",e);
+			} 
+			
+			
+			
+			
+			
+			
+			
+			return false;
+		}
+
+		@Override
+		public boolean handleFault(SOAPMessageContext context) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public void close(MessageContext context) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public Set<QName> getHeaders() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 	}
 
 	@Override
