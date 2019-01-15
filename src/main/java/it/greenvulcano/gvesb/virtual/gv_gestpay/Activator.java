@@ -134,7 +134,7 @@ public class Activator implements BundleActivator {
 						log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
 						
 					} else {
-						log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+						log.debug("SOAP Response:\n" + new String(byteArrayOutputStream.toByteArray()));
 					}
 					
 				} catch (Exception e) {
