@@ -81,17 +81,12 @@ public class Activator implements BundleActivator {
 				WSCryptDecrypt wsCryptDecrypt = new WSCryptDecrypt(new URL(endpoint));
 				logger.info("Created SOAP service for " + sysName + "/" + name +", pointing to " + endpoint);
 				
+				BindingProvider wsBindingProvider = (BindingProvider) wsCryptDecrypt;
 				
-				if (logger.isDebugEnabled()) {
-				
-					BindingProvider wsBindingProvider = (BindingProvider) wsCryptDecrypt;
-					
-					List handlerList = wsBindingProvider.getBinding().getHandlerChain();
-					if (handlerList==null) handlerList = new ArrayList();
-					handlerList.add(new SOAPLoggingHandler());
-					wsBindingProvider.getBinding().setHandlerChain(handlerList);
-					
-				}
+				List handlerList = wsBindingProvider.getBinding().getHandlerChain();
+				if (handlerList==null) handlerList = new ArrayList();
+				handlerList.add(new SOAPLoggingHandler());
+				wsBindingProvider.getBinding().setHandlerChain(handlerList);
 				
 				cryptDecryptChannels.put(sysName + "/" + name, wsCryptDecrypt);
 			}
@@ -128,47 +123,39 @@ public class Activator implements BundleActivator {
 		@Override
 		public boolean handleMessage(SOAPMessageContext context) {
 			
-			try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
-				
-				Boolean outboundProperty = (Boolean)context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
-				
-				context.getMessage().writeTo(byteArrayOutputStream);
-			
-				if (outboundProperty) {
-					log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+			if (log.isDebugEnabled()) {
+				try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
 					
-				} else {
-					log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
-				}
+					Boolean outboundProperty = (Boolean)context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+					
+					context.getMessage().writeTo(byteArrayOutputStream);
 				
-			} catch (Exception e) {
-				log.warn("SOAP Message dump FAILED",e);
-			} 
+					if (outboundProperty) {
+						log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+						
+					} else {
+						log.debug("SOAP Request:\n" + new String(byteArrayOutputStream.toByteArray()));
+					}
+					
+				} catch (Exception e) {
+					log.warn("SOAP Message dump FAILED",e);
+				}
+			}
 			
-			
-			
-			
-			
-			
-			
-			return false;
+			return true;
 		}
 
 		@Override
 		public boolean handleFault(SOAPMessageContext context) {
-			// TODO Auto-generated method stub
-			return false;
+			return true;
 		}
 
 		@Override
 		public void close(MessageContext context) {
-			// TODO Auto-generated method stub
-			
 		}
 
 		@Override
 		public Set<QName> getHeaders() {
-			// TODO Auto-generated method stub
 			return null;
 		}
 		
